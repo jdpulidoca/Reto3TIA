@@ -1,0 +1,447 @@
+[
+    {
+        "id": "e09783e308532c75",
+        "type": "tab",
+        "label": "Primer reto",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f6f02b966136cc15",
+        "type": "telegram bot",
+        "botname": "JuliP_UNALbot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "eddf7fff4df3f2c8",
+        "type": "noraf-config",
+        "name": "Nora_JuliP",
+        "group": "",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "localexecution": true,
+        "structure": "",
+        "storeStateInContext": false,
+        "disableValidationErrors": false,
+        "sendDeviceNameAndLocation": false
+    },
+    {
+        "id": "01fe1c5d95f01bab",
+        "type": "function",
+        "z": "e09783e308532c75",
+        "name": "Menú",
+        "func": "flow.set('Id', msg.payload.chatId)\nvar palabra = msg.payload.content.toLowerCase()\nif (palabra.includes(\"cambio\")||palabra.includes(\"pizza\")) {\n   msg.payload.content = \"Elige otro idioma\\n Choose another language \\n Escolha outro idioma \";\n    var opts = {\n        reply_markup: JSON.stringify({\n            \"inline_keyboard\": [\n                [{ \"text\": \"Español\", \"callback_data\": \"1\" }],\n                [{ \"text\": \"English\", \"callback_data\": \"2\" }],\n                [{ \"text\": \"português\", \"callback_data\": \"3\" }]\n            ]\n        })\n    };\n    msg.error = false;\n    msg.payload.options = opts;\n    return [msg];\n}else if (palabra==\"es\"){\n    msg.payload.content = \"🍕🍕 Hola Bienvenido a la pizzeria TIA👋 \\n Estamos hablando en español. ¿Quieres continuar o elegir otro idioma?\";\n    var opts = {\n        reply_markup: JSON.stringify({\n            \"inline_keyboard\": [\n                [{ \"text\":\"Continuar\", \"callback_data\": \"1\" }],\n                [{ \"text\": \"Elegir otro idioma\", \"callback_data\": \"39\" }]\n            ]\n        })\n    };\n    msg.error = false;\n    msg.payload.options = opts;\n    return [msg];\n}\nelse if (palabra==\"en\") {\n    msg.payload.content = \"🍕🍕 Hello, welcome to TIA pizzeria👋  .\\n We are speaking in Spanish. Do you want to continue or choose another language?\";\n    var opts = {\n        reply_markup: JSON.stringify({\n            \"inline_keyboard\": [\n                [{ \"text\": \"Continue\", \"callback_data\": \"2\" }],\n                [{ \"text\": \"Choose another language\", \"callback_data\": \"39\" }]\n            ]\n        })\n    };\n    msg.error = false;\n    msg.payload.options = opts;\n    return [msg];\n}\nelse if (palabra==\"pt\") {\n    msg.payload.content = \"🍕🍕 Olá, seja bem vindo à pizzaria TIA👋 \\n Estamos conversando em português. Quer continuar ou escolher outro idioma?\";\n    var opts = {\n        reply_markup: JSON.stringify({\n            \"inline_keyboard\": [\n                [{ \"text\": \"Continuar\", \"callback_data\": \"3\" }],\n                [{ \"text\": \"Escolher outro idioma\", \"callback_data\": \"39\" }]                \n            ]\n        })\n    };\n    msg.error = false;\n    msg.payload.options = opts;\n    return [msg];\n}\n//---------------------------------- Tamaños\nelse if (palabra.includes(\"espanol\")){\n \n        msg.payload.content = \"Tamaños\";\n        var opts = {\n            reply_markup: JSON.stringify({\n                \"inline_keyboard\": [\n                    [{ \"text\": \"Pequeña.\\n 2 porciones\", \"callback_data\": \"4\" }],\n                    [{ \"text\": \"Mediana.\\n 4 porciones\", \"callback_data\": \"5\" }],\n                    [{ \"text\": \"Grande.\\n 8 porciones\", \"callback_data\": \"6\" }],\n                    [{ \"text\": \"Regresar a idiomas\", \"callback_data\": \"34\" }],\n                ]\n            })\n        };\n        msg.error = false;\n        msg.payload.options = opts;\n        return [msg];\n\n}\nelse if (palabra.includes(\"ingles\")) {\n\n    msg.payload.content = \"Size\";\n    var opts = {\n        reply_markup: JSON.stringify({\n            \"inline_keyboard\": [\n                [{ \"text\": \"Small.\\n 2 slices\", \"callback_data\": \"7\" }],\n                [{ \"text\": \"Medium.\\n 4 slices\", \"callback_data\": \"8\" }],\n                [{ \"text\": \"Large.\\n 8 slices\", \"callback_data\": \"9\" }],\n                [{ \"text\": \"Select language again\", \"callback_data\": \"34\" }],\n            ]\n        })\n    };\n    msg.error = false;\n    msg.payload.options = opts;\n    return [msg];\n}\nelse if (palabra.includes(\"portugues\")) {\n\n    msg.payload.content = \"Tamanho\";\n    var opts = {\n        reply_markup: JSON.stringify({\n            \"inline_keyboard\": [\n                [{ \"text\": \"Pequeno.\\n 2 pedaços\", \"callback_data\": \"10\" }],\n                [{ \"text\": \"Médio.\\n 4 pedaços\", \"callback_data\": \"11\" }],\n                [{ \"text\": \"Grande.\\n 8 pedaços\", \"callback_data\": \"12\" }],\n                [{ \"text\": \"Voltar à língua\", \"callback_data\": \"34\" }],\n            ]\n        })\n    };\n    msg.error = false;\n    msg.payload.options = opts;\n    return [msg];\n} \n\n//---------------------------------- Sabores\nelse if (palabra.includes(\"tamano\")) {\nif(flow.get('idioma')==\"espanol\"){\n    msg.payload.content = \"Sabores\";\n    \n    var opts = {\n        reply_markup: JSON.stringify({\n            \"inline_keyboard\": [\n                [{ \"text\": \"Hawaina\", \"callback_data\": \"13\" }],\n                [{ \"text\": \"Peperonni\", \"callback_data\": \"14\" }],\n                [{ \"text\": \"Pollo con champiñones\", \"callback_data\": \"15\" }],\n                [{ \"text\": \"Mexicana\", \"callback_data\": \"16\" }],\n                [{ \"text\": \"Vegetariana\", \"callback_data\": \"17\" }],\n                [{ \"text\": \"Volver a tamaños\", \"callback_data\": \"35\" }],\n                \n            ]\n        })\n    };\n    msg.error = false;\n    msg.payload.options = opts;\n    return [msg];\n} else if (flow.get('idioma') == \"ingles\") {\n    msg.payload.content = \"Flavors\";\n\n    var opts = {\n        reply_markup: JSON.stringify({\n            \"inline_keyboard\": [\n                [{ \"text\": \"Pineapple pizza\", \"callback_data\": \"18\" }],\n                [{ \"text\": \"Peperonni\", \"callback_data\": \"19\" }],\n                [{ \"text\": \"Chicken with mushrooms\", \"callback_data\": \"20\" }],\n                [{ \"text\": \"Mexican\", \"callback_data\": \"21\" }],\n                [{ \"text\": \"Vegetables\", \"callback_data\": \"22\" }],\n                [{ \"text\": \"Come back to sizes\", \"callback_data\": \"36\" }],\n            ]\n        })\n    };\n    msg.error = false;\n    msg.payload.options = opts;\n    return [msg];\n} else if (flow.get('idioma') == \"portugues\") {\n    msg.payload.content = \"Sabores\";\n\n    var opts = {\n        reply_markup: JSON.stringify({\n            \"inline_keyboard\": [\n                [{ \"text\": \"Hawaina\", \"callback_data\": \"23\" }],\n                [{ \"text\": \"Peperonni\", \"callback_data\": \"24\" }],\n                [{ \"text\": \"Frango com cogumelos\", \"callback_data\": \"25\" }],\n                [{ \"text\": \"Mexicano\", \"callback_data\": \"26\" }],\n                [{ \"text\": \"Vegetais\", \"callback_data\": \"27\" }],\n                [{ \"text\": \"Voltar a tamanos\", \"callback_data\": \"37\" }],\n            ]\n        })\n    };\n    msg.error = false;\n    msg.payload.options = opts;\n    return [msg];\n}\n}\n\n//---------------------------------- Menu Final\nelse if (palabra.includes(\"sabores\")) {\n    if (flow.get('idioma') == \"espanol\") {\n        msg.payload.content = \"Confirme su pedido\";\n\n        var opts = {\n            reply_markup: JSON.stringify({\n                \"inline_keyboard\": [\n                    [{ \"text\": \"Quiero saber más\", \"callback_data\": \"28\" }],\n                    [{ \"text\": \"Volver a sabores\", \"callback_data\": \"38\" }],\n                    [{ \"text\": \"Confirmar\", \"callback_data\": \"29\" }],\n                ]\n            })\n        };\n        msg.error = false;\n        msg.payload.options = opts;\n        return [msg];\n    } else if (flow.get('idioma') == \"ingles\") {\n        msg.payload.content = \"Please confirm your order\";\n\n        var opts = {\n            reply_markup: JSON.stringify({\n                \"inline_keyboard\": [\n                    [{ \"text\": \"I wanna know more\", \"callback_data\": \"30\" }],\n                    [{ \"text\": \"Go back to flavors\", \"callback_data\": \"38\" }],\n                    [{ \"text\": \"Confirm order\", \"callback_data\": \"31\" }]\n                ]\n            })\n        };\n        msg.error = false;\n        msg.payload.options = opts;\n        return [msg];\n    } else if (flow.get('idioma') == \"portugues\") {\n        msg.payload.content = \"Confirme a sua encomenda\";\n\n        var opts = {\n            reply_markup: JSON.stringify({\n                \"inline_keyboard\": [\n                    [{ \"text\": \"Quero saber mais\", \"callback_data\": \"32\" }],\n                    [{ \"text\": \"Voltar à sabores\", \"callback_data\": \"38\" }],\n                    [{ \"text\": \"Confirmar a encomenda\", \"callback_data\": \"33\" }]\n                ]\n            })\n        };\n        msg.error = false;\n        msg.payload.options = opts;\n        return [msg];\n    }\n}\nelse if (msg.payload.content == \"33\" || msg.payload.content == \"29\" || msg.payload.content == \"31\") {\n    if (flow.get('idioma') == \"espanol\") {\n        msg.payload.content = \"Pedido Realizado\";\n        return [msg];\n    } else if (flow.get('idioma') == \"ingles\") {\n        msg.payload.content = \"Order placed\";\n        return [msg];\n    } else if (flow.get('idioma') == \"portugues\") {\n        msg.payload.content = \"Pedido feito\";\n        return [msg];\n    }\n}\nelse{\n    msg.payload.content = \"🤦\";\n    return [msg];\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 320,
+        "wires": [
+            [
+                "6e45a33f45de0b02",
+                "9bbdf65098141fe6"
+            ]
+        ]
+    },
+    {
+        "id": "859daf3696302f5d",
+        "type": "telegram receiver",
+        "z": "e09783e308532c75",
+        "name": "",
+        "bot": "f6f02b966136cc15",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "x": 90,
+        "y": 280,
+        "wires": [
+            [
+                "5caa5fba0820d0bb"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "6e45a33f45de0b02",
+        "type": "telegram sender",
+        "z": "e09783e308532c75",
+        "name": "",
+        "bot": "f6f02b966136cc15",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1670,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f486e868fb0d8643",
+        "type": "telegram event",
+        "z": "e09783e308532c75",
+        "name": "",
+        "bot": "f6f02b966136cc15",
+        "event": "callback_query",
+        "autoanswer": false,
+        "x": 400,
+        "y": 400,
+        "wires": [
+            [
+                "080a815984b9463d",
+                "883d3437fa495ac9",
+                "7d0a80b16ebef161",
+                "d85a765b2bd7ccd0",
+                "e88d6b51041a947a"
+            ]
+        ]
+    },
+    {
+        "id": "080a815984b9463d",
+        "type": "function",
+        "z": "e09783e308532c75",
+        "name": "Gestor de Banderas/Botones",
+        "func": "if (msg.payload.content == \"1\") {\n    msg.payload.type = \"message\"\n    flow.set('idioma', \"espanol\")\n}\nif (msg.payload.content == \"2\") {\n    msg.payload.type = \"message\"\n    flow.set('idioma', \"ingles\")\n\n}\n\nif (msg.payload.content == \"3\") {\n    msg.payload.type = \"message\"\n    flow.set('idioma', \"portugues\")\n} \n//-------------------------------------------------------------------------------------------------------- Cambio Idioma\nif (msg.payload.content == \"39\") {\n    msg.payload.type = \"message\"\n    flow.set('cambio', \"cambio\")\n}\n//-------------------------------------------------------------------------------------------------------- Tamaño pizzas\nif (msg.payload.content == \"4\" || msg.payload.content == \"7\" || msg.payload.content == \"10\") {\n    msg.payload.type = \"message\"\n    flow.set('tamano', \"pequeno\")\n    flow.set('precio', 10000)\n}\n\nif (msg.payload.content == \"5\" || msg.payload.content == \"8\" || msg.payload.content == \"11\") {\n    msg.payload.type = \"message\"\n    flow.set('tamano', \"mediano\")\n    flow.set('precio', 20000)\n} \nif (msg.payload.content == \"6\" || msg.payload.content == \"9\" || msg.payload.content == \"12\") {\n    msg.payload.type = \"message\"\n    flow.set('tamano', \"grande\")\n    flow.set('precio', 25000)\n} \n//-------------------------------------------------Sabores-----------------------\n\nif (msg.payload.content == \"13\" || msg.payload.content == \"18\" || msg.payload.content == \"23\") {\n    msg.payload.type = \"message\"\n    flow.set('sabores', \"Explain Pineapple pizza\")\n    flow.set('precio', 25000)\n} \nif (msg.payload.content == \"14\" || msg.payload.content == \"19\" || msg.payload.content == \"24\") {\n    msg.payload.type = \"message\"\n    flow.set('sabores', \"Explain Peperonni pizza\")\n    flow.set('precio', 25000)\n} \nif (msg.payload.content == \"15\" || msg.payload.content == \"20\" || msg.payload.content == \"25\") {\n    msg.payload.type = \"message\"\n    flow.set('sabores', \"Explain Chicken with Mushrooms pizza\")\n    flow.set('precio', 25000)\n} \nif (msg.payload.content == \"16\" || msg.payload.content == \"21\" || msg.payload.content == \"26\") {\n    msg.payload.type = \"message\"\n    flow.set('sabores', \"Explain Mexican pizza\")\n    flow.set('precio', 25000)\n}   \nif (msg.payload.content == \"17\" || msg.payload.content == \"22\" || msg.payload.content == \"27\") {\n    msg.payload.type = \"message\"\n    flow.set('sabores', \"Explain Vegetarian pizza\")\n    flow.set('precio', 25000)\n}\n\n//return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 460,
+        "wires": [
+            [
+                "6e45a33f45de0b02"
+            ]
+        ]
+    },
+    {
+        "id": "883d3437fa495ac9",
+        "type": "function",
+        "z": "e09783e308532c75",
+        "name": "Gestor de Menus",
+        "func": "//variables\nvar callbacks_tamano = [\"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"10\", \"11\", \"12\",\"38\"]\nvar call_back_sabores = [\"13\", \"14\", \"15\", \"16\", \"17\", \"18\", \"19\", \"20\", \"21\", \"22\", \"23\", \"24\", \"25\", \"26\", \"27\"]\nvar call_back_confirmacion = [\"29\", \"31\", \"33\"]\n\n//funciones\nif (msg.payload.content == \"1\" || msg.payload.content == \"35\") {\nmsg.payload.type = \"message\"\nmsg.payload.content = \"espanol\"\n}\nelse if (msg.payload.content == \"2\" || msg.payload.content == \"36\") {\n    msg.payload.type = \"message\"\n    msg.payload.content = \"ingles\"\n}\nelse if (msg.payload.content == \"3\" || msg.payload.content == \"37\") {\n    msg.payload.type = \"message\"\n    msg.payload.content = \"portugues\"\n}\n//--------------------------------------------------------------cambio idioma----------------------------------------\nelse if (msg.payload.content==\"39\") {\n    msg.payload.type = \"message\"\n    msg.payload.content = \"cambio\"\n}\n//--------------------------------------------------------------Sabores----------------------------------------\nelse if (callbacks_tamano.includes(msg.payload.content)){\n    msg.payload.type = \"message\"\n    msg.payload.content = \"tamano\"\n}\n\n\n//-------------------------------------------------- Menu final\nelse if (call_back_sabores.includes(msg.payload.content)) {\n    msg.payload.type = \"message\"\n    msg.payload.content = \"sabores\"\n}\nelse if (msg.payload.content==\"34\"){\n    msg.payload.type = \"message\"\n    msg.payload.content = \"pizza\"\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 380,
+        "wires": [
+            [
+                "01fe1c5d95f01bab",
+                "2b7d67f5eeae1d0b"
+            ]
+        ]
+    },
+    {
+        "id": "7d0a80b16ebef161",
+        "type": "function",
+        "z": "e09783e308532c75",
+        "name": "Desempaquetar",
+        "func": "if (msg.payload.content == \"28\" || msg.payload.content == \"30\" || msg.payload.content == \"32\"){\n    msg.chatId = msg.payload.chatId\n    msg.payload = flow.get('sabores') //Asignacion, para el desempaquetado\n    return msg;\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 520,
+        "wires": [
+            [
+                "db66777667247d73"
+            ]
+        ]
+    },
+    {
+        "id": "db66777667247d73",
+        "type": "chatgpt",
+        "z": "e09783e308532c75",
+        "name": "",
+        "API_KEY": "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",
+        "Organization": "org-vcINPJDjcf2m8510ug0HsGM7",
+        "topic": "completion",
+        "BaseUrl": "https://api.openai.com",
+        "x": 800,
+        "y": 520,
+        "wires": [
+            [
+                "70dfad5fb1bbedd5"
+            ]
+        ]
+    },
+    {
+        "id": "79a4b436699ea7e5",
+        "type": "function",
+        "z": "e09783e308532c75",
+        "name": "Empaquetar",
+        "func": "\nmsg.payload = {\n    chatId :msg.chatId,\n    type : \"message\",\n    content : msg.payload  \n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1410,
+        "y": 520,
+        "wires": [
+            [
+                "6e45a33f45de0b02"
+            ]
+        ]
+    },
+    {
+        "id": "c719e631d90f4038",
+        "type": "watson-translator",
+        "z": "e09783e308532c75",
+        "name": "",
+        "action": "translate",
+        "basemodel": "ar-en",
+        "domain": "general",
+        "srclang": "en",
+        "destlang": "es",
+        "apikey": "WCJkBjpo8i4N9E4yECYkAJRbj8riedK07tuYLe73igwq",
+        "custom": "",
+        "domainhidden": "general",
+        "srclanghidden": "en",
+        "destlanghidden": "es",
+        "basemodelhidden": "ar-en",
+        "customhidden": "",
+        "filetype": "forcedglossary",
+        "trainid": "",
+        "lgparams2": true,
+        "service-endpoint": "https://api.au-syd.language-translator.watson.cloud.ibm.com/instances/975cda59-a199-45cc-b37a-95585cddfbd6",
+        "x": 1190,
+        "y": 500,
+        "wires": [
+            [
+                "79a4b436699ea7e5"
+            ]
+        ]
+    },
+    {
+        "id": "70dfad5fb1bbedd5",
+        "type": "function",
+        "z": "e09783e308532c75",
+        "name": "Selector",
+        "func": "let condicion = flow.get('idioma')\nif (condicion == 'espanol') {\n    return [msg, null, null, null, null];\n}\n\nif (condicion == 'ingles') {\n    return [null, msg, null, null, null];\n}\n\nif (condicion == 'portugues') {\n    return [null, null , msg, null, null];\n}",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 520,
+        "wires": [
+            [
+                "c719e631d90f4038"
+            ],
+            [
+                "79a4b436699ea7e5"
+            ],
+            [
+                "65009117cc22558a"
+            ]
+        ]
+    },
+    {
+        "id": "65009117cc22558a",
+        "type": "watson-translator",
+        "z": "e09783e308532c75",
+        "name": "",
+        "action": "translate",
+        "basemodel": "ar-en",
+        "domain": "general",
+        "srclang": "en",
+        "destlang": "pt",
+        "apikey": "WCJkBjpo8i4N9E4yECYkAJRbj8riedK07tuYLe73igwq",
+        "custom": "",
+        "domainhidden": "general",
+        "srclanghidden": "en",
+        "destlanghidden": "pt",
+        "basemodelhidden": "ar-en",
+        "customhidden": "",
+        "filetype": "forcedglossary",
+        "trainid": "",
+        "lgparams2": true,
+        "service-endpoint": "https://api.au-syd.language-translator.watson.cloud.ibm.com/instances/975cda59-a199-45cc-b37a-95585cddfbd6",
+        "x": 1190,
+        "y": 540,
+        "wires": [
+            [
+                "79a4b436699ea7e5"
+            ]
+        ]
+    },
+    {
+        "id": "db256c98fa95f334",
+        "type": "e-mail",
+        "z": "e09783e308532c75",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "jdpulidoca@unal.edu.co",
+        "dname": "",
+        "x": 970,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "9bbdf65098141fe6",
+        "type": "debug",
+        "z": "e09783e308532c75",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "2b7d67f5eeae1d0b",
+        "type": "debug",
+        "z": "e09783e308532c75",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "5caa5fba0820d0bb",
+        "type": "watson-language-translator-identify",
+        "z": "e09783e308532c75",
+        "name": "IdentificadorLenguaje",
+        "service-endpoint": "https://api.au-syd.language-translator.watson.cloud.ibm.com/instances/d8109792-c289-49da-bf7b-17820e3a0eed",
+        "x": 340,
+        "y": 280,
+        "wires": [
+            [
+                "9b88844c7633b565",
+                "a0e8b2eb8c38947e"
+            ]
+        ]
+    },
+    {
+        "id": "504d01d98e60aa9e",
+        "type": "debug",
+        "z": "e09783e308532c75",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "9b88844c7633b565",
+        "type": "debug",
+        "z": "e09783e308532c75",
+        "name": "debug 14",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "a0e8b2eb8c38947e",
+        "type": "function",
+        "z": "e09783e308532c75",
+        "name": "IdiomaIdentificado",
+        "func": "msg.payload.content = msg.lang.language\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 280,
+        "wires": [
+            [
+                "01fe1c5d95f01bab",
+                "504d01d98e60aa9e"
+            ]
+        ]
+    },
+    {
+        "id": "d85a765b2bd7ccd0",
+        "type": "debug",
+        "z": "e09783e308532c75",
+        "name": "debug 15",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "e88d6b51041a947a",
+        "type": "function",
+        "z": "e09783e308532c75",
+        "name": "Confirmacion Pedido",
+        "func": "var call_backs_confirmacion = [\"29\", \"31\", \"33\"]\nif (call_backs_confirmacion.includes(msg.payload.content)) {\n    msg.payload.type = String\n    msg.payload = \"A continuación la info del pedido.\"\n    msg.topic = \"Se ha hecho un pedido\"\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 340,
+        "wires": [
+            [
+                "db256c98fa95f334"
+            ]
+        ]
+    }
+]
